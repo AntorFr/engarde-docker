@@ -1,0 +1,25 @@
+# engarde-client on the laptop (macOS). WireGuard's "Train" profile points its
+# Endpoint at listenAddr; every packet is then sent through every interface below.
+client:
+  description: "laptop"
+  listenAddr: "127.0.0.1:59401"
+  dstAddr: "vpn.berard.me:59402"
+  writeTimeout: 10
+  # Only interfaces holding an IPv4 address are used. Exclude the WireGuard tunnel
+  # itself (it would loop) and macOS virtual interfaces.
+  excludedInterfaces:
+    - "lo0"
+    - "utun0"
+    - "utun1"
+    - "utun2"
+    - "utun3"
+    - "utun4"
+    - "utun5"
+    - "utun6"
+    - "utun7"
+    - "bridge0"
+  interfaceLabels:
+    en0: "Wi-Fi"
+    en7: "iPhone USB"
+  webManager:
+    listenAddr: "127.0.0.1:9001"
