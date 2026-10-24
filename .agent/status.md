@@ -1,12 +1,13 @@
 # Status — engarde-docker
-> MàJ : 2026-10-23
+> MàJ : 2026-10-24
 
-**État :** image 0.1.0 publiée, chart `engarde` 0.1.0 publié, relais déployé sur homenode (infra, UDP 59402, IP source préservée vérifiée). Côté Mac et UDM : rien encore.
+**État :** EN PAUSE. Image `ghcr.io/antorfr/engarde:0.1.0` et chart `engarde` 0.1.0 publiés, branchés nulle part. Le relais sur homenode a été retiré : refus de toute redirection de port WAN → LAN. Prérequis posé par l'utilisateur : une DMZ sur machine physique dédiée, sans accès au LAN.
+
+**Acquis (testé le 2026-10-23) :** relais → WireGuard de l'UDM par le réseau interne OK ; IP source préservée avec `externalTrafficPolicy: Local` ; client macOS compilé et fonctionnel.
 
 **Prochaines étapes :**
-- [ ] Redirection UDP 59402 WAN → homenode (192.168.10.11) sur l'UDM
-- [ ] Profil WireGuard « Train » sur le Mac
-- [ ] Tester à la maison : l'UDM accepte-t-il le WireGuard relayé par le LAN ?
-- [ ] Tester à la maison : macOS envoie-t-il bien une copie par interface (Wi-Fi + iPhone USB) ?
-- [ ] Trajet du mardi 2026-10-27 : mesurer avec et sans engarde
-- [ ] tmux dans l'image de Fury (homelab-sdlc-core) — à décider
+- [ ] (utilisateur) Monter la DMZ : machine physique dédiée, pare-feu UDM DMZ → seulement UDP 62704 (porte WireGuard)
+- [ ] Déployer le relais sur la machine DMZ (même image), `dstAddr` = porte WireGuard de l'UDM
+- [ ] Tester : macOS envoie-t-il bien une copie par interface (Wi-Fi + iPhone USB, câble data) ?
+- [ ] Tester la boucle avec Endpoint 127.0.0.1 en full tunnel ; sinon exclure l'IP du relais d'AllowedIPs
+- [ ] tmux dans l'image de Fury (homelab-sdlc-core) — recommandé, à valider
